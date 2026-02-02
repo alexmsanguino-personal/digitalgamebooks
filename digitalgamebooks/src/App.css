@@ -1,0 +1,245 @@
+.page {
+  min-height: 100vh;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.hero {
+  background: var(--panel-gradient);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  box-shadow: var(--shadow-soft);
+}
+
+.brand {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  background: var(--accent-gradient);
+  display: grid;
+  place-items: center;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: 0 10px 30px rgba(65, 139, 255, 0.4);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+h1 {
+  margin: 0.15rem 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.lede {
+  margin: 0.2rem 0 0.6rem;
+  color: var(--text-secondary);
+  max-width: 48ch;
+}
+
+.controls {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+select {
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.7rem;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text-primary);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.panel.focus {
+  border-color: var(--border-strong);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.catalog-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.9rem;
+  padding: 0.9rem;
+  background: var(--panel-raised);
+  transition: border-color 150ms ease, transform 150ms ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.card-active {
+  border-color: var(--accent);
+  box-shadow: 0 8px 26px rgba(65, 139, 255, 0.2);
+}
+
+.card-title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.muted {
+  color: var(--text-secondary);
+  margin: 0.25rem 0;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0.15rem 0 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--pill);
+  color: var(--text-primary);
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+}
+
+.pill.subtle {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.search-box {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0.4rem;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
+}
+
+input {
+  border-radius: 0.7rem;
+  border: 1px solid var(--border-strong);
+  padding: 0.65rem 0.75rem;
+  background: var(--panel);
+  color: var(--text-primary);
+}
+
+button {
+  border-radius: 0.7rem;
+  border: 1px solid var(--accent-border);
+  padding: 0.65rem 1.1rem;
+  background: var(--accent);
+  color: #0b1224;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 150ms ease;
+  box-shadow: 0 12px 30px rgba(65, 139, 255, 0.3);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.hint {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.banner {
+  margin-top: 0.5rem;
+  border-radius: 0.7rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 107, 107, 0.08);
+  color: #ff7b7b;
+  font-weight: 600;
+}
+
+.result {
+  margin-top: 0.9rem;
+  border-radius: 0.9rem;
+  padding: 1rem;
+  background: var(--panel-raised);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.result-header {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.footer {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: minmax(320px, 1.2fr) minmax(320px, 1fr);
+  }
+}
