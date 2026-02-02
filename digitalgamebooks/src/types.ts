@@ -4,8 +4,10 @@ export type GameCatalogItem = {
   id: string
   title: string
   description: string
+  coverUrl: string
   languages: LanguageCode[]
   entriesRange: { min: number; max: number }
+  tags?: string[]
 }
 
 export type GameEntry = {

@@ -1,63 +1,63 @@
 import type { EntriesIndex } from '../types'
 
 export const entriesIndex: EntriesIndex = {
-  'lost-island': {
+  'big-trouble-little-china': {
     es: {
-      1: {
-        title: 'Desembarco entre la niebla',
-        body: 'Las olas golpean tu bote mientras la isla emerge frente a ti. Una antorcha parpadea en la playa del norte.',
+      5: {
+        title: 'Callejón bajo la lluvia',
+        body: 'Linternas rojas se balancean. Si ayudas al mensajero herido, podrás sumar +1 a tu siguiente tirada social.',
       },
-      42: {
-        title: 'Cámara de coral',
-        body: 'El techo brilla con fósiles marinos. Encuentras inscripciones que hablan de guardianes dormidos.',
+      88: {
+        title: 'Mercado hechizado',
+        body: 'Una brisa helada apaga los faroles. Ganas un amuleto: úsalo para repetir un dado en un futuro encuentro.',
       },
-      128: {
-        title: 'Sendero del volcán',
-        body: 'El suelo vibra. Si llevas el talismán de obsidiana, suma +2 a tu siguiente tirada de agilidad.',
+      176: {
+        title: 'Tren fantasma',
+        body: 'Cruje la madera del vagón. Si portas pólvora, recibes +2 al daño en el próximo combate.',
       },
     },
     en: {
-      1: {
-        title: 'Landing through the fog',
-        body: 'Waves slap your boat as the island emerges ahead. A torch flickers on the northern shore.',
+      5: {
+        title: 'Alley under the rain',
+        body: 'Red lanterns sway above you. If you aid the wounded courier, add +1 to your next social roll.',
       },
-      42: {
-        title: 'Coral chamber',
-        body: 'The ceiling glows with marine fossils. You spot carvings speaking of dormant guardians.',
+      88: {
+        title: 'Enchanted market',
+        body: 'A cold gust blows out the lamps. You earn a charm: use it to reroll one die in a future encounter.',
       },
-      128: {
-        title: 'Volcano trail',
-        body: 'The ground trembles. If you carry the obsidian talisman, add +2 to your next agility roll.',
+      176: {
+        title: 'Ghost train',
+        body: 'The wagon wood creaks. If you carry gunpowder, gain +2 damage in the next fight.',
       },
     },
   },
-  'space-trail': {
+  'myskatonic-tales-innsmouth': {
     es: {
-      3: {
-        title: 'Puente de mando',
-        body: 'La IA de la nave solicita autenticación. Puedes intentar un bypass (Ingeniería) o despertar a la tripulación.',
+      12: {
+        title: 'Farola apagada',
+        body: 'Solo queda el olor a sal y algas. Si tienes brújula, puedes ignorar la primera penalización por niebla.',
       },
-      77: {
-        title: 'Astillero en ruinas',
-        body: 'Los drones flotan sin energía. Encuentras un módulo de hipersalto con 1 uso restante.',
+      66: {
+        title: 'Biblioteca de los Marsh',
+        body: 'Encuentras un cuaderno húmedo. Puedes consultar una pista adicional sin coste en el próximo enigma.',
       },
-      150: {
-        title: 'Nube de cristal',
-        body: 'Partículas luminosas rodean el casco. Reduce en 1 el daño de los próximos dos encuentros.',
+      142: {
+        title: 'Las escaleras sumergidas',
+        body: 'El agua sube rápido. Si decides bajar, roba 1 estrés; si subes, ganas 1 calma.',
       },
     },
     en: {
-      3: {
-        title: 'Command deck',
-        body: 'The ship AI requests authentication. Try a bypass (Engineering) or wake the crew.',
+      12: {
+        title: 'Dark streetlamp',
+        body: 'Only salt and seaweed remain in the air. If you carry a compass, ignore the first fog penalty.',
       },
-      77: {
-        title: 'Ruined shipyard',
-        body: 'Drones drift without power. You find a hyperspace module with 1 charge left.',
+      66: {
+        title: 'Marsh library',
+        body: 'You find a damp notebook. You may peek one extra clue at no cost in the next puzzle.',
       },
-      150: {
-        title: 'Crystal cloud',
-        body: 'Luminous particles wrap the hull. Reduce incoming damage by 1 for the next two encounters.',
+      142: {
+        title: 'Submerged stairs',
+        body: 'Water rises fast. If you descend, gain 1 stress; if you retreat, gain 1 composure.',
       },
     },
   },
