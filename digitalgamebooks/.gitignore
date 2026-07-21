@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local PDF extraction inputs and intermediate output
+/Big.pdf
+/pdf_extracted.txt
+/out.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

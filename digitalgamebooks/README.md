@@ -1,27 +1,44 @@
-# Digital Gamebooks (prototipo)
+# Digital Gamebooks
 
-Pequeña app web en React + Vite para consultar entradas de libros de aventuras de mesa con búsqueda por número y selector de idioma. Mock de datos en local y preparada para desplegar en Azure Static Web Apps (plan gratuito).
+Aplicación React + Vite para consultar libros de aventuras por misión y número de evento, sin tener que recorrer el PDF durante la partida.
 
-## Requisitos
-- Node 18+
-- npm (incluido con Node)
+## Estado actual
 
-## Scripts
-- `npm install` instala dependencias.
-- `npm run dev` levanta el entorno local en `http://localhost:5173`.
-- `npm run build` genera la versión estática en `dist/`.
-- `npm run preview` sirve el build para verificación.
+- Biblioteca visual con libros disponibles y próximos títulos.
+- Big Trouble in Little China digitalizado en español: 15 misiones y 67 eventos (`1.1`–`15.2`).
+- Selector agrupado por misión y navegación anterior/siguiente.
+- Datos separados por libro e idioma, preparados para añadir traducciones.
+- Diseño adaptable a escritorio y móvil.
 
-## Estructura breve
-- `src/data/catalog.ts`: catálogo de juegos (id, idiomas, rango de entradas).
-- `src/data/entries.ts`: entradas mock por juego/idioma.
-- `src/App.tsx`: UI principal con selector de juego/idioma y buscador.
-- `src/index.css` / `src/App.css`: estilos responsive, tema oscuro con acentos.
+## Desarrollo
 
-## Despliegue en Azure Static Web Apps (Free)
-1) Crea el recurso en Azure Portal seleccionando GitHub como origen y la rama principal. Ruta de app: `/`, comando de build: `npm run build`, directorio de artefactos: `dist`.
-2) Añade el secreto `AZURE_STATIC_WEB_APPS_API_TOKEN` en GitHub (lo da el asistente de Azure).
-3) El workflow `.github/workflows/azure-static-web-apps.yml` construye y publica la app con cada push.
+```bash
+npm install
+npm run dev
+```
 
-## Datos adicionales
-Los datos son estáticos para la demo. Si necesitas edición en vivo, se puede añadir Azure Functions + Table Storage (free/consumo) más adelante.
+Comprobaciones:
+
+```bash
+npm run build
+npm run lint
+```
+
+## Datos de los libros
+
+La versión web no necesita una base de datos por ahora. Los eventos se guardan como JSON estático versionado, lo que mantiene el despliegue sencillo y gratuito:
+
+```text
+src/data/books/
+  big-trouble-little-china.es.json
+```
+
+Cada archivo declara `bookId`, `language` y un diccionario `entries`. Una futura traducción puede añadirse como otro archivo, por ejemplo `big-trouble-little-china.en.json`, y registrarse en `src/App.tsx`.
+
+El JSON español se regenera a partir de la extracción de texto del PDF con:
+
+```bash
+npm run data:big-trouble
+```
+
+El generador está en `scripts/build-big-trouble-data.cjs` y valida que estén presentes los 67 identificadores esperados antes de sobrescribir el archivo de datos.
