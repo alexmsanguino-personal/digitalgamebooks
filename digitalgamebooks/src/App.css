@@ -2,6 +2,24 @@
   min-height: 100vh;
 }
 
+@font-face {
+  font-family: 'Chinese Rocks';
+  src: url('/big-trouble/fonts/chinese-rocks.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Chinese Rocks Shaded';
+  src: url('/big-trouble/fonts/chinese-rocks-shaded.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Marker SD';
+  src: url('/big-trouble/fonts/marker-italic.ttf') format('truetype');
+  font-display: swap;
+}
+
 button,
 select {
   font: inherit;
@@ -229,60 +247,201 @@ button {
 .entry-sheet {
   padding: clamp(26px, 5vw, 64px);
   border-radius: 18px;
-  background: #eee8d8;
-  color: #262820;
+  background: #fff;
+  color: #111;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
 }
 
 .entry-title-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 26px;
-  border-bottom: 1px solid rgba(38, 40, 32, 0.22);
+  padding-bottom: 24px;
+  text-align: center;
 }
 
 .entry-title-row h2 {
   margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.65rem, 4vw, 2.8rem);
-  font-weight: 500;
-  line-height: 1.05;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .mission-label {
-  color: #806819;
+  margin-bottom: 6px;
+  color: #846c17;
+}
+
+.event-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  margin-right: 24px;
+  padding: 6px 64px 6px 14px;
+  border: 1px solid #4c4c4c;
+  background: #f58e4d;
+}
+
+.event-banner h3 {
+  margin: 0;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .entry-number {
-  flex: 0 0 auto;
-  color: #8a281f;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  position: absolute;
+  right: -32px;
+  display: grid;
+  width: 66px;
+  height: 66px;
+  place-items: center;
+  border: 6px solid #d4aa28;
+  border-radius: 50%;
+  background: #4c4b48;
+  color: #ffd91c;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
   line-height: 1;
+  box-shadow: 0 0 0 2px #6e6b60, 0 3px 5px rgba(0, 0, 0, 0.35);
 }
 
 .entry-copy {
   display: grid;
-  gap: 18px;
+  gap: 20px;
   padding: 34px 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.05rem;
-  line-height: 1.78;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.48;
 }
 
 .entry-copy p {
   margin: 0;
 }
 
-.entry-callout {
-  padding: 15px 18px;
-  border-left: 4px solid #a33c2f;
-  background: rgba(163, 60, 47, 0.08);
-  font-family: Inter, 'Segoe UI', sans-serif;
-  font-size: 0.92rem;
-  font-weight: 650;
-  line-height: 1.55;
+.event-instruction {
+  color: #ed1717;
+  font-weight: 800;
+}
+
+.entry-opening {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+}
+
+.entry-opening.without-portrait {
+  grid-template-columns: 1fr;
+}
+
+.hero-portrait {
+  width: 118px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.opening-narrative {
+  display: grid;
+  gap: 18px;
+}
+
+.entry-opening:not(.without-portrait) .opening-narrative > p:first-child {
+  padding: 12px 8px;
+  border-top: 2px solid #e3b91a;
+  border-bottom: 2px solid #e3b91a;
+  font-family: 'Marker SD', 'Comic Sans MS', cursive;
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+.choice-heading {
+  margin: 8px 0 0;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid #555;
+}
+
+.choice-card {
+  position: relative;
+  min-height: 180px;
+  padding: 22px 18px;
+  text-align: center;
+}
+
+.choice-card + .choice-card {
+  border-left: 1px solid #555;
+}
+
+.choice-a {
+  background: linear-gradient(180deg, #20b8ea 0, #dff6fd 42%, #fff 72%);
+}
+
+.choice-b {
+  background: linear-gradient(180deg, #f58bc8 0, #fce3f1 42%, #fff 72%);
+}
+
+.choice-card h4 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.stop-reading {
+  margin-top: 22px !important;
+  color: #ed1717;
+  font-weight: 800;
+  white-space: pre-line;
+}
+
+.result-card {
+  padding: 14px 12px;
+  border: 3px solid #02b5e9;
+  font-weight: 550;
+}
+
+.result-success {
+  border-color: #42c83a;
+}
+
+.result-success::first-line {
+  color: #20bd24;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.35rem;
+}
+
+.result-failure {
+  border-color: #ef3c34;
+}
+
+.result-failure::first-line {
+  color: #e21d1d;
+  font-family: 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.35rem;
+}
+
+.result-conclusion {
+  border-color: #eda73b;
+}
+
+.result-conclusion::first-line {
+  font-family: 'Chinese Rocks Shaded', 'Chinese Rocks', Impact, sans-serif;
+  font-size: 1.25rem;
 }
 
 .entry-navigation {
@@ -341,6 +500,38 @@ button {
   }
 
   .entry-title-row {
-    align-items: flex-start;
+    padding-bottom: 18px;
+  }
+
+  .event-banner {
+    min-height: 44px;
+    margin-right: 20px;
+    padding-right: 54px;
+  }
+
+  .entry-number {
+    right: -24px;
+    width: 54px;
+    height: 54px;
+    border-width: 5px;
+    font-size: 1.4rem;
+  }
+
+  .entry-opening {
+    grid-template-columns: 82px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .hero-portrait {
+    width: 82px;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-card + .choice-card {
+    border-top: 1px solid #555;
+    border-left: 0;
   }
 }

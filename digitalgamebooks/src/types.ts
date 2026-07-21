@@ -21,6 +21,7 @@ export type BookEntry = {
   id: string
   mission: number
   missionTitle: string
+  title: string
   text: string
 }
 

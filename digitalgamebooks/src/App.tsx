@@ -34,23 +34,93 @@ const localizedBooks: Record<string, Partial<Record<LanguageCode, LocalizedBook>
 const sectionPattern =
   /(?=(?:HAGA UNA ELECCI[ÓO]N|OPCI[ÓO]N\s+[AB]|[ÉE]XITO|FRACASO|CONCLUSI[ÓO]N DEL EVENTO|RECOMPENSA DE MISI[ÓO]N|COMBATE|PRUEBA DE HABILIDAD|¡DEJA DE LEER!))/giu
 
-function EntryText({ text }: { text: string }) {
-  const sections = text.split(sectionPattern).filter(Boolean)
+const sectionClass = (text: string) => {
+  if (/^[ÉE]XITO/iu.test(text)) return 'result-card result-success'
+  if (/^FRACASO/iu.test(text)) return 'result-card result-failure'
+  if (/^CONCLUSI[ÓO]N DEL EVENTO/iu.test(text)) return 'result-card result-conclusion'
+  if (/^(?:RECOMPENSA DE MISI[ÓO]N|COMBATE|PRUEBA DE HABILIDAD)/iu.test(text)) return 'result-card'
+  return undefined
+}
+
+function EntryText({ entry }: { entry: BookEntry }) {
+  const sections = entry.text.split(sectionPattern).map((section) => section.trim()).filter(Boolean)
+  const choiceHeadingIndex = sections.findIndex((section) => /^HAGA UNA ELECCI[ÓO]N/iu.test(section))
+  const beforeChoices = choiceHeadingIndex >= 0 ? sections.slice(0, choiceHeadingIndex) : sections
+  const choiceCards: Array<{ variant: 'a' | 'b'; body: string; stop?: string }> = []
+  const deferredChoiceResults: string[] = []
+  let afterChoiceIndex = choiceHeadingIndex + 1
+
+  if (choiceHeadingIndex >= 0) {
+    while (afterChoiceIndex < sections.length) {
+      const option = sections[afterChoiceIndex]
+      const optionMatch = option.match(/^OPCI[ÓO]N\s+([AB])/iu)
+      if (!optionMatch) break
+
+      const optionBody = option.replace(/^OPCI[ÓO]N\s+[AB]:?\s*/iu, '').trim()
+      let stop: string | undefined
+      const stopText = sections[afterChoiceIndex + 1]
+      if (stopText && /^¡DEJA DE LEER!/iu.test(stopText)) {
+        const stopMatch = stopText.match(
+          /^(¡DEJA DE LEER!.*?(?:tarea|prueba|elecci[óo]n)\.)\s*(.*)$/iu,
+        )
+        stop = stopMatch?.[1] ?? stopText
+        if (stopMatch?.[2]) deferredChoiceResults.push(stopMatch[2])
+        afterChoiceIndex += 1
+      }
+
+      choiceCards.push({
+        variant: optionMatch[1].toLowerCase() as 'a' | 'b',
+        body: optionBody,
+        stop,
+      })
+      afterChoiceIndex += 1
+    }
+  }
+
+  const afterChoices = choiceHeadingIndex >= 0
+    ? [...deferredChoiceResults, ...sections.slice(afterChoiceIndex)]
+    : []
+  const instructionEnd = beforeChoices[0]?.search(/carta de Misi[óo]n\./iu) ?? -1
+  const instructionLength = instructionEnd >= 0 ? instructionEnd + 'carta de Misión.'.length : 0
+  const instruction = instructionLength ? beforeChoices[0].slice(0, instructionLength) : undefined
+  const openingText = instructionLength ? beforeChoices[0].slice(instructionLength).trim() : beforeChoices[0]
+  const portrait = entry.mission <= 12
+    ? `/big-trouble/portraits/mission-${String(entry.mission).padStart(2, '0')}.jpeg`
+    : undefined
 
   return (
     <div className="entry-copy">
-      {sections.map((section, index) => {
-        const trimmed = section.trim()
-        const isCallout = /^(?:HAGA UNA ELECCI[ÓO]N|OPCI[ÓO]N\s+[AB]|[ÉE]XITO|FRACASO|CONCLUSI[ÓO]N DEL EVENTO|RECOMPENSA DE MISI[ÓO]N|COMBATE|PRUEBA DE HABILIDAD|¡DEJA DE LEER!)/iu.test(
-          trimmed,
-        )
+      {instruction && <p className="event-instruction">{instruction}</p>}
+      <div className={`entry-opening ${portrait ? '' : 'without-portrait'}`}>
+        {portrait && <img className="hero-portrait" src={portrait} alt="Retrato del protagonista" />}
+        <div className="opening-narrative">
+          {openingText && <p>{openingText}</p>}
+          {beforeChoices.slice(1).map((section, index) => (
+            <p className={sectionClass(section)} key={`before-${index}`}>
+              {section}
+            </p>
+          ))}
+        </div>
+      </div>
 
-        return (
-          <p className={isCallout ? 'entry-callout' : undefined} key={`${index}-${trimmed.slice(0, 12)}`}>
-            {trimmed}
-          </p>
-        )
-      })}
+      {choiceHeadingIndex >= 0 && <h3 className="choice-heading">Haga una elección:</h3>}
+      {choiceCards.length > 0 && (
+        <div className="choice-grid">
+          {choiceCards.map((choice) => (
+            <div className={`choice-card choice-${choice.variant}`} key={choice.variant}>
+              <h4>Opción {choice.variant.toUpperCase()}:</h4>
+              <p>{choice.body}</p>
+              {choice.stop && <p className="stop-reading">{choice.stop}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {afterChoices.map((section, index) => (
+        <p className={sectionClass(section)} key={`after-${index}`}>
+          {section}
+        </p>
+      ))}
     </div>
   )
 }
@@ -134,13 +204,14 @@ function App() {
 
           <article className="entry-sheet">
             <div className="entry-title-row">
-              <div>
-                <p className="mission-label">Misión {activeEntry.mission}</p>
-                <h2>{activeEntry.missionTitle}</h2>
-              </div>
+              <p className="mission-label">Misión {activeEntry.mission}</p>
+              <h2>{activeEntry.missionTitle}</h2>
+            </div>
+            <div className="event-banner">
+              <h3>{activeEntry.title}</h3>
               <strong className="entry-number">{activeEntry.id}</strong>
             </div>
-            <EntryText text={activeEntry.text} />
+            <EntryText entry={activeEntry} />
             <nav className="entry-navigation" aria-label="Navegación entre entradas">
               <button type="button" disabled={activeIndex <= 0} onClick={() => moveEntry(-1)}>
                 ← Anterior
